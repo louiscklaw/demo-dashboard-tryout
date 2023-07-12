@@ -1,0 +1,9 @@
+services:
+  whoami-iamon99:
+    image: 'traefik/whoami'
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: traefik-proxy-network

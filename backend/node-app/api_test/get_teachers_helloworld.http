@@ -1,0 +1,72 @@
+@baseUrl = http://localhost:3000/v1
+
+# @name register
+POST {{baseUrl}}/auth/register HTTP/1.1
+content-type: application/json
+
+{
+  "name": "fake name",
+  "email": "fake@example.com",
+  "password": "password1"
+}
+
+###
+
+# @name login
+POST {{baseUrl}}/auth/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "demo@devias.io",
+  "password": "Password123!"
+}
+
+###
+
+@access_token= {{login.response.body.tokens.access.token}}
+@refresh_token = {{login.response.body.tokens.refresh.token}}
+
+GET {{baseUrl}}/teachers HTTP/1.1
+Authorization: Bearer {{access_token}}
+
+###
+
+GET {{baseUrl}}/teachers/helloworld HTTP/1.1
+Authorization: Bearer {{access_token}}
+
+###
+
+# @name logout
+POST {{baseUrl}}/auth/logout HTTP/1.1
+content-type: application/json
+
+{
+  "refreshToken": "{{refresh_token}}"
+}
+
+###
+# http://localhost:3001/dashboard/teachers/64a45b69d5544232d345b96d/edit
+GET {{baseUrl}}/teachers/64a45b69d5544232d345b96d
+
+###
+PATCH {{baseUrl}}/teachers/64a45b69d5544232d345b96d
+content-type: application/json
+
+{
+  "email": "demo@devias.io",
+  "name":"aaaaaabcde"
+}
+
+###
+DELETE {{baseUrl}}/teachers/64a45b69d5544232d345b96d
+
+###
+POST {{baseUrl}}/teachers
+content-type: application/json
+
+{
+  "email": "demo@devias.io",
+  "password": "Password123!",
+  "name":"aaaaaabcde",
+  "role":"user"
+}
