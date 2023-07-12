@@ -4,16 +4,21 @@ services:
     restart: unless-stopped
     labels:
       - 'traefik.enable=true'
+
       - 'traefik.http.routers.whoami-dashbord-demo-iamon99-http.rule=Host(`whoami-dashbord-demo.iamon99.com`)'
       - 'traefik.http.routers.whoami-dashbord-demo-iamon99-http.entrypoints=web'
       - 'traefik.http.routers.whoami-dashbord-demo-iamon99-http.middlewares=whoami-dashbord-demo-iamon99-https'
       - 'traefik.http.middlewares.whoami-dashbord-demo-iamon99-https.redirectscheme.scheme=https'
+
       - 'traefik.http.routers.whoami-dashbord-demo-iamon99-https.rule=Host(`whoami-dashbord-demo.iamon99.com`)'
       - 'traefik.http.routers.whoami-dashbord-demo-iamon99-https.entrypoints=websecure'
       - 'traefik.http.routers.whoami-dashbord-demo-iamon99-https.tls.certresolver=myresolver'
       - "traefik.tcp.services.whoami-dashbord-demo-iamon99-https.loadbalancer.server.port=8080"
     # depends_on:
     #   - traefik
+    exposes:
+      - 8080
+      - 80
 
 volumes:
   dbdata:
