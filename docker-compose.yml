@@ -16,7 +16,7 @@ services:
       - "traefik.tcp.services.whoami-dashbord-demo-iamon99-https.loadbalancer.server.port=8080"
     # depends_on:
     #   - traefik
-    expose:
+    ports:
       - 8080
       - 80
 
