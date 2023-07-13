@@ -27,8 +27,12 @@ services:
       - "traefik.http.routers.dashbord-demo-doc-louislabs-http.rule=Host(`dashbord-demo-doc.louislabs.com`)"
       - "traefik.http.routers.dashbord-demo-doc-louislabs-http.entrypoints=web"
       - "traefik.http.services.dashbord-demo-doc-louislabs-http.loadbalancer.server.port=8089"
+      
+  mongodb:
+    ports:
+      - 27017:27017
 
 networks:
   default:
-    external:
-      name: traefik-proxy-network
+    name: traefik-proxy-network
+    external: true
