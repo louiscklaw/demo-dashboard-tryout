@@ -9,4 +9,4 @@ cd documentation
 cd -
 
 docker push 192.168.10.61:5000/dashboard-demo-documentation
-# docker run -it 192.168.10.61:5000/dashboard-demo-frontend bash
+# docker run -it 192.168.10.61:5000/dashboard-demo-documentation bash
