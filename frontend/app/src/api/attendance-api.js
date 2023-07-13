@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { subDays, subHours, subMinutes, subSeconds } from 'date-fns';
 
-const HOST = '//localhost:3000';
-const API = `${HOST}/v1`;
-const API_ENDPOINT = `${API}/attendances`;
+// const HOST = '//localhost:3000';
+// const API = `${HOST}/v1`;
+// const API_ENDPOINT = `${API}/attendances`;
+import { apiConfig } from 'src/config';
+const API = `${apiConfig.apiEndpoint}`;
+const API_ENDPOINT = `${apiConfig.apiEndpoint}/attendances`;
 
 const now = new Date();
 
