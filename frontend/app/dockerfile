@@ -1,6 +1,14 @@
 FROM node:16-buster
+EXPOSE 3000
 
-RUN mkdir -p /app/node_modules
-RUN chown 1000:1000 -R /app/node_modules
-
+RUN mkdir -p /app
+COPY . /app
+RUN chown 1000:1000 -R /app
 USER 1000:1000
+
+WORKDIR /app
+
+RUN npm install
+RUN npm run build
+
+CMD ['npm','run','start']

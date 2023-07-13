@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import NextLink from 'next/link';
 import Head from 'next/head';
 import { Box, Breadcrumbs, Container, Link, Typography } from '@mui/material';
-import { AuthGuard } from '../../../components/authentication/auth-guard';
-import { DashboardLayout } from '../../../components/dashboard/dashboard-layout';
-import { ProductCreateForm } from '../../../components/dashboard/product/product-create-form';
-import { gtm } from '../../../lib/gtm';
+import { AuthGuard } from 'src/components/authentication/auth-guard';
+import { DashboardLayout } from 'src/components/dashboard/dashboard-layout';
+import { ProductCreateForm } from 'src/components/dashboard/product/product-create-form';
+import { gtm } from 'src/lib/gtm';
 
 const ProductCreate = () => {
   useEffect(() => {

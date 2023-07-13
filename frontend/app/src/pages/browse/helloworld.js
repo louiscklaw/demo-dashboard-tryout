@@ -8,7 +8,7 @@ import { WidgetPreviewer } from '../../components/widget-previewer';
 import { BackgroundLetterAvatars } from 'src/components/widgets/mui-avatars/background-letter-avatars';
 import { gtm } from '../../lib/gtm';
 
-WidgetImportListHere;
+// WidgetImportListHere;
 
 const BrowseHelloworld = () => {
   useEffect(() => {
