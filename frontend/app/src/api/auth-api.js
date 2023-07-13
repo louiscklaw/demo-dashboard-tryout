@@ -25,6 +25,7 @@ class AuthApi {
     }
 
     return new Promise((resolve, reject) => {
+      console.log({ apiConfig });
       axios
         .post(`${apiConfig.apiEndpoint}/auth/login`, {
           email: email,

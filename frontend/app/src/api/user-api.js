@@ -3,7 +3,8 @@ import { sign, decode, JWT_SECRET, JWT_EXPIRES_IN } from '../utils/jwt';
 import { wait } from '../utils/wait';
 import axios from 'axios';
 
-const API_ENDPOINT = '//localhost:3000/v1';
+import { apiConfig } from 'src/config';
+// const API_ENDPOINT = '//localhost:3000/v1';
 
 // BOOKMARK: UserApi
 class UserApi {
@@ -12,7 +13,7 @@ class UserApi {
     const headers = { Authorization: `Bearer ${accessToken}` };
 
     return axios
-      .put(`${API_ENDPOINT}/users/basic_user_detail`, user, { headers })
+      .put(`${apiConfig.apiEndpoint}/users/basic_user_detail`, user, { headers })
       .then(function ({ data }) {
         console.log(data);
       })
@@ -34,7 +35,7 @@ class UserApi {
 
   async getUserById(userId) {
     return axios
-      .get(`//localhost:3000/v1/users/${userId}`)
+      .get(`${apiConfig.apiEndpoint}/users/${userId}`)
       .then(({ data }) => {
         return data;
       })
@@ -43,7 +44,7 @@ class UserApi {
 
   async helloworld({ email, password }) {
     return axios
-      .post('//localhost:3000/v1/user/helloworld', {
+      .post(`${apiConfig.apiEndpoint}/user/helloworld`, {
         email: email,
         password: password,
       })
