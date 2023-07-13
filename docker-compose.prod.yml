@@ -1,7 +1,31 @@
 services:
-  whoami-iamon99:
-    image: 'traefik/whoami'
-    restart: unless-stopped
+  whoami-dashbord-demo:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami-dashbord-demo-louislabs-http.rule=Host(`whoami-dashbord-demo.louislabs.com`)"
+      - "traefik.http.routers.whoami-dashbord-demo-louislabs-http.entrypoints=web"
+      - "traefik.http.services.whoami-dashbord-demo-louislabs-http.loadbalancer.server.port=80"
+
+  frontend:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashbord-demo-louislabs-http.rule=Host(`dashbord-demo.louislabs.com`)"
+      - "traefik.http.routers.dashbord-demo-louislabs-http.entrypoints=web"
+      - "traefik.http.services.dashbord-demo-louislabs-http.loadbalancer.server.port=3000"
+
+  node-app:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashbord-demo-backend-louislabs-http.rule=Host(`dashbord-demo-backend.louislabs.com`)"
+      - "traefik.http.routers.dashbord-demo-backend-louislabs-http.entrypoints=web"
+      - "traefik.http.services.dashbord-demo-backend-louislabs-http.loadbalancer.server.port=3000"
+
+  documentation:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashbord-demo-doc-louislabs-http.rule=Host(`dashbord-demo-doc.louislabs.com`)"
+      - "traefik.http.routers.dashbord-demo-doc-louislabs-http.entrypoints=web"
+      - "traefik.http.services.dashbord-demo-doc-louislabs-http.loadbalancer.server.port=8089"
 
 networks:
   default:
