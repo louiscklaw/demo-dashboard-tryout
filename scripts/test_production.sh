@@ -9,5 +9,5 @@ npm run docker:prod
 docker compose pull
 
 pushd backend/node-app
-  npm run seed
+  npm run prod:seed
 popd
