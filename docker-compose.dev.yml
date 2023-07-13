@@ -1,8 +1,21 @@
+# NOTE: ./frontend contains source for frontend
+
 services:
   frontend:
-    # NOTE: ./frontend contains source for frontend
+    build: ./frontend/app
+    ports:
+      - 3001:3000
+    env_file: ./frontend/app/.env.development
     command: ./dev.sh
-    # command: sleep infinity
+    volumes:
+      - frontend_node_modules:/app/node_modules
+      - ./frontend/app:/app
+
+  email-server:
+    image: mailhog/mailhog:latest
+    ports:
+      - 1025:1025
+      - 8025:8025
 
   node-app:
     container_name: node-app-dev
@@ -13,31 +26,33 @@ services:
     depends_on:
       - mongodb
       - email-server
-
-  email-server:
-    image: mailhog/mailhog:latest
     ports:
-      - 1025:1025
-      - 8025:8025
-    networks:
-      - node-network
+      # NOTE: for test locally using browser
+      - 3000:3000
+
+  mongodb:
+    ports:
+      # NOTE: explicity port mapping for db seeding
+      - 27017:27017
 
   mongo-express:
     image: mongo-express:latest
     ports:
-      - '8081:8081'
+      - 8081:8081
     volumes:
       - ./volumes/backend/mongo-express:/app
       - ./volumes/backend/mongo-express/docker-entrypoint.sh:/docker-entrypoint.sh
     depends_on:
       - mongodb
-    links:
-      - mongodb
+
     environment:
       # for wait in docker-entrypoint.sh
       - ME_CONFIG_MONGODB_SERVER=mongodb
       - ME_CONFIG_MONGODB_PORT=27017
       # - ME_CONFIG_BASICAUTH_USERNAME=user
       # - ME_CONFIG_BASICAUTH_PASSWORD=password
-    networks:
-      - node-network
+
+volumes:
+  dbdata:
+  documentation_node_modules:
+  frontend_node_modules:
