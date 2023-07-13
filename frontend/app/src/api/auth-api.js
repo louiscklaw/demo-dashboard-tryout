@@ -4,7 +4,7 @@ import { wait } from '../utils/wait';
 import axios from 'axios';
 import { userApi } from './user-api';
 
-const API_ENDPOINT = '//localhost:3000/v1';
+import { apiConfig } from 'src/config';
 
 const users = [
   {
@@ -26,7 +26,7 @@ class AuthApi {
 
     return new Promise((resolve, reject) => {
       axios
-        .post('//localhost:3000/v1/auth/login', {
+        .post(`${apiConfig.apiEndpoint}/auth/login`, {
           email: email,
           password: password,
         })
@@ -51,7 +51,7 @@ class AuthApi {
 
     return axios
       .put(
-        `${API_ENDPOINT}/auth/basic-user-detail`,
+        `${apiConfig.apiEndpoint}/auth/basic-user-detail`,
         {
           email: user.email,
           name: user.name,
